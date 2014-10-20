@@ -1,13 +1,14 @@
 /css/icomoon.css
 /css/main.css
+/css/map.css
 /filelist
 /fonts/icomoon.eot
 /fonts/icomoon.svg
 /fonts/icomoon.ttf
 /fonts/icomoon.woff
+/html/map.html
 /images/icon.png
 /images/thumbnail.png
-/index.html
 /js/initOptions.js
 /js/jquery-2.1.1.js
 /js/jquery.ui.map.extensions.js
@@ -15,7 +16,9 @@
 /js/jquery.ui.map.overlays.js
 /js/jquery.ui.map.services.js
 /js/main.js
+/js/map.js
 /js/messages.js
+/login.html
 /worklight/checksum.js
 /worklight/cordova.js
 /worklight/cordova_plugins.js

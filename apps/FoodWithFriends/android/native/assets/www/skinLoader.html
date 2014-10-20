@@ -30,7 +30,7 @@
 					cordova.exec(null, null, "WLApp", "writeUserPref", ["wlSkinName", skinName]);
 					
 					//get skin path
-					cordova.exec(onGetSkinPathSuccess, null, "WLApp", "getSkinPath", [skinName,"index.html"]);
+					cordova.exec(onGetSkinPathSuccess, null, "WLApp", "getSkinPath", [skinName,"login.html"]);
 					
 					function onGetSkinPathSuccess(skinPath){
 						document.location = skinPath;
