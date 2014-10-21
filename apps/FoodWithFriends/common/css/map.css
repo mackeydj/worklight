@@ -1,20 +1,43 @@
+.settings-n-search {
+	bottom: 0;
+	position: absolute;
+	z-index: 5;
+	width: 100%
+}
+
 .search-wrapper {
-    margin: 0 0 5px 0;
-    border: 1px solid gray;
+    background-color: #fff;
+    border: 1px solid #395773;
     border-radius: 5px;
+    margin: 1% 5% 5%;
+    width: 90%;
+    z-index: 5;
+    overflow: hidden;
 }
 
 .search-wrapper .search,
-*:focus {
+.search-wrapper .search:focus {
     border: none;
     outline: none;
-} 
+    margin: 3px;
+    width: 86%;
+}
+
+#settings {
+	background-color: #263a4c;
+    border-radius: 10px;
+    color: #5987b2;
+    float: left;
+    font-size: 30px;
+    margin: 0 0 2% 5%;
+    padding: 5px;
+}
 
 .btnSearch {
     float: right;
-    padding: 2px 5px;
+    padding: 4px 5px 0 0;
     text-decoration: none;
-    color: gray;
+    color: #334d66;
 }
 
 #map_canvas {
