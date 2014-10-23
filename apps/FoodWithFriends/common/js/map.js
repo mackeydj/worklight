@@ -48,12 +48,12 @@ function initialize(position) {
       }
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
   }
-  google.maps.event.addListener(map, 'click', function(event) {
-    marker = new google.maps.Marker({
-      position : event.latLng,
-      map : map
-    });
-  });
+//  google.maps.event.addListener(map, 'click', function(event) {
+//    marker = new google.maps.Marker({
+//      position : event.latLng,
+//      map : map
+//    });
+//  });
   
 }
 
@@ -63,6 +63,11 @@ function onLocationSuccess(position) {
 function onLocationError(error) {
   console.log("Error occured. Code is:" + error.code);
 }
+
+$(document).on("click", "#map_canvas", function() {
+  $(".search-results").hide();
+  return false;
+});
 
 $(document).on("click", ".search-wrapper .btnSearch", function() {
   //TODO add google places search stuff here and refactor this to a different js file
@@ -85,15 +90,60 @@ $(document).on("click", ".search-wrapper .btnSearch", function() {
     var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     var request = {
       location: coords,
-      radius: '200'
+      radius: '200',
+      type: 'restaurant'
     };
     
-    service = new google.maps.places.PlacesService(document.getElementById("map_canvas"));
+    var mapOptions = {
+        zoom : 8, // zoom level
+        center: coords,
+        panControl : true,
+        zoomControl : true,
+        scaleControl : true,
+        mapTypeId : google.maps.MapTypeId.ROADMAP
+      }
+    
+    service = new google.maps.places.PlacesService(document.getElementById("map_canvas"), mapOptions);
     service.nearbySearch(request, function(results) {
+      var places = [];
       $(results).each(function (id, result) {
+        
         WL.Logger.debug(id + " " + result);
+        var lat1 = result.geometry.location.lat();
+        var lat2 = position.coords.latitude;
+        var dlon = position.coords.longitude-result.geometry.location.lng();
+        var dlat = lat2-lat1;
+        var a = Math.pow(Math.sin(dlat/2),2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(dlon/2),2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = 3961 * c;
+        
+        places.push({'name':result.name, 'distance':round(d)});
+        
       });
+      map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+      
+      places.sort(function(a, b) {return a.distance - b.distance});
+      
+      var resultsHtml = "";
+      var lastIndex = places.length-1;
+      $.each(places, function(index, place) {
+        var lastElementClass = "";
+        if (index == lastIndex) {
+          lastElementClass = " lastElement";
+        }
+        resultsHtml += "<div class='place"+lastElementClass+"'>" +
+          "<div class='name'>"+place.name+"</div>" +
+          "<div class='distance'>"+place.distance+" miles</div>" +  
+          "</div>";
+      });
+      
+      $("body .search-results").html(resultsHtml).show();
     });
   });
 });
+
+//round to the nearest 1/1000
+function round(x) {
+  return Math.round( x * 1000) / 1000;
+}
 

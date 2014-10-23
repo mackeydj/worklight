@@ -49,6 +49,14 @@
 }
 .icon-food:before {
     content: "\e605";
+    background: none;
+    display: block;
+    margin-top: 25%;  
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 500%;
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);  
 }
 .icon-flag:before {
     content: "\e606";

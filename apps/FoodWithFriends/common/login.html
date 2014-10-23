@@ -20,10 +20,22 @@
 <script type="text/javascript" src="js/main.js"></script>
 </head>
 
-<body onload="WL.Client.init({})" id="content">
+<body onload="WL.Client.init({})" id="content"  style="background: linear-gradient(to bottom, #a7cfdf 0%,#23538a 100%); ">
+</br>
+<div id="logo" class="icon-food"></div></br>
 
-Add login form here <br />
-<a href="#" id="gotoMap" >Go to page after login</a>
+<section class="loginform cf">  
+<form name="login" action="index_submit" method="goToMap" accept-charset="utf-8">  
+    <ul>  
+        <li>
+        <input type="text" name="username" placeholder="Username" required></li>  </br>
+        <li>
+        <input type="password" name="password" placeholder="Password" required></li>  
+        <li>  </br>
+        <input type="submit" id="gotoMap" value="goToMap"></li>  
+    </ul>  
+</form>  
+</section>  
 
 </body>
 </html>

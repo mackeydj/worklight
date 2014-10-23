@@ -24,5 +24,6 @@ $(document).ready(function() {
     $("body").load("html/map.html", function() {
       loadMap();
     });
+    return false;
   });
 });
